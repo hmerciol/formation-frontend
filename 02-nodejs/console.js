@@ -67,7 +67,12 @@ function menuConsole(){
 
     rl.question('Choisissez une action : ', function(choixMenu){
         var action = menu[choixMenu];
-        action();
+        if(action == undefined){
+            console.log('Le menu n\'existe pas');
+            menuConsole();
+        } else {
+            action();
+        }
     });
 };
 
