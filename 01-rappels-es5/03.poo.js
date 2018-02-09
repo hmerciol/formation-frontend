@@ -7,8 +7,8 @@ function Personne(nom,prenom,pseudo){
     }
 };
 
-jules = new Personne("LEMAIRE","Jules","jules77");
-paul = new Personne("LEMAIRE","Paul","paul44");
+var jules = new Personne("LEMAIRE","Jules","jules77");
+var paul = new Personne("LEMAIRE","Paul","paul44");
 
 function afficherPersonne(p){
     console.log(p.nom);
@@ -42,7 +42,7 @@ console.log(jules.getInitiales());
 
 //---------------------------
 
-robert = {
+var robert = {
     nom : "LEPREFET",
     prenom : "Robert",
     pseudo : "robert77",
@@ -62,7 +62,7 @@ function Client(nom,prenom,pseudo,numeroClient){
     }
 };
 
-steve = new Client("LUCAS","steve","steve44","A01");
+var steve = new Client("LUCAS","steve","steve44","A01");
 
 afficherPersonne(steve);
 console.log(steve.numeroClient);
