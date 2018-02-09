@@ -37,9 +37,13 @@ function afficherToutesLesSessions(){
 function afficherUneSession(){
     rl.question('Quelle session ? ', function(choixSession){
         var sess = service.trouverUneSession(choixSession);
-        afficherSession(sess);
-        console.log("Description : "+sess.desc);
-        console.log("Orateur(s) : "+sess.speakers)
+        if(sess == undefined){
+            console.log('La session n\'existe pas');
+        } else {
+            afficherSession(sess);
+            console.log("Description : "+sess.desc);
+            console.log("Orateur(s) : "+sess.speakers);
+        }
         menuConsole();
     });
 };
