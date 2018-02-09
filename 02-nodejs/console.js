@@ -12,7 +12,7 @@ function afficherPresentateur(pres){
 }
 
 function afficherSession(sess){
-    console.log('Titre : '+sess.title);
+    console.log('Titre : '+sess.title+" (identifiant : "+sess.id+")");
     console.log('Salle : '+sess.confRoom+" en "+sess.hour);
 }
 
