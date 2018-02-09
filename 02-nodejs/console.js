@@ -19,41 +19,53 @@ function afficherSession(sess){
 function afficherTousLesPresentateurs(){
     console.log('La liste des présentateurs :');
     service.listerTousLesPresentateurs().forEach(afficherPresentateur);
-    rl.close();
+    menuConsole();
 };
 
 function afficherTopPresentateurs(){
     console.log('Le top des présentateurs :');
     service.listerTopPresentateurs().forEach(afficherPresentateur);
-    rl.close();
+    menuConsole();
 };
 
 function afficherToutesLesSessions(){
     console.log('La liste des conférences :');
     service.listerToutesLesSessions().forEach(afficherSession);
-    rl.close();
+    menuConsole();
 };
 
 function afficherUneSession(){
     rl.question('Quelle session ? ', function(choixSession){
         afficherSession(service.trouverUneSession(choixSession));
-        rl.close();
+        menuConsole();
     });
 };
 
+function quitter(){
+    rl.close();
+}
+
 //actions du menu
-var menu = { 1 : afficherTousLesPresentateurs, 2 : afficherTopPresentateurs
-    , 3 : afficherToutesLesSessions, 4 : afficherUneSession
+var menu = { 1 : afficherTousLesPresentateurs
+    , 2 : afficherTopPresentateurs
+    , 3 : afficherToutesLesSessions
+    , 4 : afficherUneSession
+    , 5 : quitter
 };
 
 //menu console
-console.log('*** Application Conférence ***');
-console.log('1. Liste de tous les présentateurs');
-console.log('2. Top présentateurs');
-console.log('3. Liste des sessions');
-console.log('4. Détail d\'une session');
+function menuConsole(){
+    console.log('*** Application Conférence ***');
+    console.log('1. Liste de tous les présentateurs');
+    console.log('2. Top présentateurs');
+    console.log('3. Liste des sessions');
+    console.log('4. Détail d\'une session');
+    console.log('5. Quitter');
 
-rl.question('Choisissez une action : ', function(choixMenu){
-    var action = menu[choixMenu];
-    action();
-});
+    rl.question('Choisissez une action : ', function(choixMenu){
+        var action = menu[choixMenu];
+        action();
+    });
+};
+
+menuConsole();
