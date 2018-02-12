@@ -55,7 +55,7 @@ class Trip {
     }
 
     toString(){
-        return "Trip ["+this.id+", "+this.name+", "+this.imageUrl+", "+this._price+"]";
+        return `Trip [${this.id}, ${this.name}, ${this.imageUrl}, ${this._price}]`;
     }
 
     get price(){
@@ -91,7 +91,7 @@ class FreeTrip extends Trip {
     }
 
     toString(){
-        return "Free"+super.toString();
+        return `Free${super.toString()}`;
     }
 }
 
@@ -111,15 +111,14 @@ class TripService {
     }
     
     findByName(tripName) {
-        let trips = this.trips;
-        return new Promise(function(resolve,reject){
-            return setTimeout(function(){
-                trips.forEach(function(trip){
+        return new Promise((resolve,reject) => {
+            setTimeout(() => {
+                this.trips.forEach(function(trip){
                     if(trip.name == tripName){
                         resolve(trip);
                     }
                 });
-                reject("No trip with name "+tripName);
+                reject(`No trip with name ${tripName}`);
             },2000);
         })
     }
@@ -128,18 +127,19 @@ class TripService {
 class PriceService {
     
     constructor() {
-        this.prices = {"paris":100,"rio-de-janeiro":800};
+        this.prices = new Map();
+        this.prices.set("paris",100);
+        this.prices.set("rio-de-janeiro",800);
     }
     
     findPriceByTripId(tripId) {
-        let prices = this.prices;
-        return new Promise(function(resolve,reject){
-            return setTimeout(function(){
-                let price = prices[tripId];
-                if(price == undefined){
-                    reject("No price found for id "+tripId);
-                } else {
+        return new Promise((resolve,reject) => {
+            setTimeout(() => {
+                let price = this.prices.get(tripId);
+                if(price){
                     resolve(price);
+                } else {
+                    reject(`No price found for id ${tripId}`);
                 }
             },2000);
         })
@@ -149,32 +149,24 @@ class PriceService {
 let tripService = new TripService();
 let priceService = new PriceService();
 
-tripService.findByName("Paris").then(function(tripFound){
-    console.log("Trip found : "+tripFound);
-}, function(error) {
-    console.log(error);
-});
+tripService.findByName("Paris")
+.then(
+    tripFound => console.log(`Trip found : ${tripFound}`), 
+    error => console.log(error)
+);
 
-tripService.findByName("Toulouse").then(function(tripFound){
-    console.log("Trip found : "+tripFound);
-}, function(error) {
-    console.log(error);
-});
+tripService.findByName("Toulouse")
+.then(
+    tripFound => console.log(`Trip found : ${tripFound}`), 
+    error => console.log(error)
+);
 
 tripService.findByName("Rio de Janeiro")
-.then(function(tripFound){
-    return priceService.findPriceByTripId(tripFound.id);
-}).then(function(priceFound){
-    console.log("Price found : "+priceFound);
-}).catch(function(error) {
-    console.log(error);
-});
+.then(tripFound => priceService.findPriceByTripId(tripFound.id))
+.then(priceFound => console.log(`Price found : ${priceFound}`))
+.catch(error => console.log(error));
 
 tripService.findByName("Nantes")
-.then(function(tripFound){
-    return priceService.findPriceByTripId(tripFound.id);
-}).then(function(priceFound){
-    console.log("Price found : "+priceFound);
-}).catch(function(error) {
-    console.log(error);
-});
+.then(tripFound => priceService.findPriceByTripId(tripFound.id))
+.then(priceFound => console.log(`Price found : ${priceFound}`))
+.catch(error => console.log(error));
