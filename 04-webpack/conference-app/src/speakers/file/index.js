@@ -11,6 +11,10 @@ export default class SpeakerFile {
             $("#speakName").append(speaker.lastname.toUpperCase()
                 +" "+speaker.firstname);
             $("#speakDesc").append(speaker.about);
+            speaker.socials.forEach(social => {
+                $("#speakSocials").append("<li><a href='"
+                +social.link+"'>"+social.class+"</a></li>");
+            });
         });
     }
 }
