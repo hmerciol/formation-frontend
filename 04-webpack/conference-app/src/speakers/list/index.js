@@ -1,11 +1,11 @@
 var $ = require('jquery');
+import speakList from './speakers.html';
 import TalkService from "../../common/talk.service";
 const talk = new TalkService();
 
 export default class SpeakerList {
     render(idView){
-        $("#"+idView).html(
-            "La liste des présentateurs :<ul id='speaker-list'></ul>");
+        $("#"+idView).html(speakList);
         talk.findAllSpeakers()
         .then(speakers => {
             speakers.forEach(speaker => {

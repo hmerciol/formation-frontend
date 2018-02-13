@@ -1,15 +1,16 @@
 var $ = require('jquery');
+import speak from './speaker.html';
 import TalkService from "../../common/talk.service";
 const talk = new TalkService();
 
 export default class SpeakerFile {
     render(idView,idSpeaker){
+        $("#"+idView).html(speak);
         talk.findOneSpeaker(idSpeaker)
         .then(speaker => {
-            $("#"+idView).html(
-                "<h1>"+speaker.lastname.toUpperCase()+" "
-                +speaker.firstname+"</h1>");
-            $("#"+idView).append("<p>"+speaker.about+"</p>");
+            $("#speakName").append(speaker.lastname.toUpperCase()
+                +" "+speaker.firstname);
+            $("#speakDesc").append(speaker.about);
         });
     }
 }
