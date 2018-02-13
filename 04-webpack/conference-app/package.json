@@ -5,13 +5,15 @@
   "main": "index.js",
   "dependencies": {
     "html-webpack-plugin": "^2.30.1",
-    "webpack-dev-server": "^2.11.1",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "json-server": "^0.12.1"
+  },
   "scripts": {
     "dist": "webpack",
-    "start": "webpack-dev-server & json-server --watch db.json"
+    "start": "json-server --watch db.json | webpack-dev-server"
   },
   "keywords": [],
   "author": "",
