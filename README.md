@@ -14,4 +14,4 @@ npm init -y
 npm install webpack --save-dev
 npm install html-webpack-plugin --save-dev
 npm install webpack-dev-server --save-dev
-npm install json-server
+npm install json-server --save-dev
