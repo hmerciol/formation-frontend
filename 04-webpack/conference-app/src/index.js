@@ -1,20 +1,26 @@
-//import TalkService from "./common/talk.service";
 import Layout from "./layout/index";
 import SpeakerList from "./speakers/list/index";
-
-alert('Conférence App démarré !');
-
-/*
-const talk = new TalkService();
-talk.findAllSpeakers().then(speakers => {
-    speakers.forEach(speaker => {
-        console.log(speaker.firstname);
-    });
-});
-*/
+import SessionList from "./sessions/list/index";
 
 const layout = new Layout();
+const spList = new SpeakerList();
+const seList = new SessionList();
+
 layout.render();
 
-const sList = new SpeakerList();
-sList.render("main-view");
+var router = () => {
+    if (location.hash == '#speakers-list') {
+        spList.render("main-view");
+    } else if (location.hash == '#sessions-list') {
+        seList.render("main-view");
+    } else {
+        // TODO afficher vue par défaut
+    }
+}
+
+window.addEventListener('load', () => {
+    window.onhashchange = () => {
+        router();
+    };
+    router();
+});
