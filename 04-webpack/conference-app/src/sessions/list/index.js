@@ -10,7 +10,8 @@ export default class SessionList {
             sessions.forEach(session => {
                 $("#session-list").append(
                     "<li>"+session.id+" "+session.title
-                    +" en salle "+session.confRoom+"</li>");
+                    +" en salle "+session.confRoom
+                    +" (<a href=#sessions-file?"+session.id+">détail</a>)</li>");
             });
         });
     }

@@ -1,9 +1,15 @@
 var $ = require('jquery');
 export default class TalkService {
-    findAllSpeakers() {   
+    findAllSpeakers(){   
         return $.get("http://localhost:3000/speakers");
     }
-    findAllSessions() {   
+    findAllSessions(){   
         return $.get("http://localhost:3000/sessions");
+    }
+    findOneSpeaker(idSpeaker){
+        return $.get("http://localhost:3000/speakers/"+idSpeaker);
+    }
+    findOneSession(idSession){
+        return $.get("http://localhost:3000/sessions/"+idSession);
     }
 }
